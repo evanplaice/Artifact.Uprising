@@ -7,6 +7,15 @@ import (
 	"github.com/gorilla/mux"
 )
 
+type Product struct {
+	ID    int    `json:"id"`
+	Name  string `json:"name"`
+	Price string `json:"price"`
+	Image string `json:"image"`
+}
+
+type Products []Product
+
 func main() {
 	r := mux.NewRouter().StrictSlash(true)
 
