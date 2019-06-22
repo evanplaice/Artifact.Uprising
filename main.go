@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"log"
 	"net/http"
+	"strconv"
 
 	"github.com/gorilla/mux"
 )
@@ -30,10 +31,40 @@ func listProducts(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(products)
 }
 
+// API: returns a product that matches the input ID
+func getProduct(w http.ResponseWriter, r *http.Request) {
+	idstr := mux.Vars(r)["id"]
+	log.Printf("Fetching Product: %#v", idstr)
+	w.Header().Set("Content-Type", "application/json")
+
+	// parse product id to a number
+	id, err := strconv.Atoi(idstr)
+	var product Product
+
+	if err == nil {
+		// match the product
+		for i := range products {
+			if products[i].ID == id {
+				product = products[i]
+			}
+		}
+	}
+
+	// return resource-not-found if no match
+	if product == (Product{}) {
+		w.WriteHeader(404)
+		return
+	}
+
+	// return the product details encoded as JSON
+	json.NewEncoder(w).Encode(product)
+}
+
 func main() {
 	r := mux.NewRouter().StrictSlash(true)
 
 	r.Path("/products").HandlerFunc(listProducts).Methods("GET")
+	r.Path("/product/{id:[0-9]+}").HandlerFunc(getProduct).Methods("GET")
 	r.PathPrefix("/").Handler(http.FileServer(http.Dir("./static/")))
 
 	log.Println("Listening...")
