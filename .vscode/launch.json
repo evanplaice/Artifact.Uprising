@@ -14,6 +14,15 @@
       ]
     },
     {
+      "type": "node",
+      "request": "launch",
+      "name": "Test Store",
+      "program": "${workspaceFolder}/static/scripts/store.spec.js",
+      "runtimeArgs": [
+        "--experimental-modules"
+      ]
+    },
+    {
       "name": "Start",
       "type": "go",
       "request": "launch",
