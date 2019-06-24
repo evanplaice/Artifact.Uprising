@@ -32,7 +32,7 @@ export class Store {
     }
 
     const newState = this.actions.get(action)(this.state, data);
-    this.state = Object.assign(this.state, newState)
+    this.state = Object.assign(this.state, newState);
   }
-  
+
 }

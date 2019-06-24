@@ -1,21 +1,27 @@
-import { LocalStore } from './store/local-store.js';
+import { PersistentStore } from './store/persistent-store.js';
 import { Cart } from './components/cart.js';
 
-const store = new LocalStore('cart', {
+const store = new PersistentStore('cart', {
   state: { items: [] },
   actions: [
     ['ADD', (state, item) => {
       state.items.push(item);
-
       return state
     }],
     ['DELETE', (state, index) =>  {
       state.items.splice(index, 1);
-
       return state;
     }],
     ['UPDATE', state => state]
-  ]
+  ],
+  save: (name, state) => {
+    localStorage.setItem(name, JSON.stringify(state));
+  },
+  load(name) {
+    if (localStorage.getItem(name) !== null) {
+      return JSON.parse(localStorage.getItem(name));
+    }
+  }
 });
 
 const cartElement = document.querySelector('#cart');

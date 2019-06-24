@@ -1,10 +1,10 @@
-import { LocalStore } from '../store/local-store.js';
+import { PersistentStore } from '../store/persistent-store.js';
 
 export class Component {
   element;
 
   constructor(props = {}) {
-    if (props.store instanceof LocalStore) {
+    if (props.store instanceof PersistentStore) {
       this.store = props.store;
       props.store.events.subscribe('stateChange', () => this.render());
     }

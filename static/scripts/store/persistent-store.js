@@ -1,9 +1,9 @@
 import { PubSub } from './pubsub.js';
 
-export class LocalStore {
+export class PersistentStore {
 
   actions = new Map();
-  state;
+  state = {};
   events = new PubSub();
 
   constructor(name, params = {}) {
@@ -15,10 +15,25 @@ export class LocalStore {
       });
     }
 
-    this.state = new Proxy(this.restore() || params.state, {
+    if (params.save) {
+      this.save = params.save;
+    }
+
+    if (params.load) {
+      this.load = params.load;
+    }
+
+    const initialState = (this.load(this.name))
+      ? this.load(this.name) : params.state;
+
+    this.state = new Proxy(initialState, {
       set: (state, key, value) => {
         state[key] = value;
-        localStorage.setItem(this.name, JSON.stringify(this.state));
+
+        // persist state
+        if (this.save) {
+          this.save(this.name, this.state);
+        }
 
         console.log(`stateChange: { ${key}: ${value} }`);
 
@@ -38,11 +53,4 @@ export class LocalStore {
     this.state = Object.assign(this.state, newState)
   }
 
-  restore() {
-    if (localStorage.getItem(this.name) !== null) {
-      return JSON.parse(localStorage.getItem(this.name));
-    }
-
-    return false;
-  }
 }
