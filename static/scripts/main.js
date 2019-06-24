@@ -1,7 +1,7 @@
-import { Store } from './store/store.js';
+import { LocalStore } from './store/local-store.js';
 import { Cart } from './components/cart.js';
 
-const store = new Store({
+const store = new LocalStore('cart', {
   state: { items: [] },
   actions: [
     ['ADD', (state, item) => {
