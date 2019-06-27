@@ -46,7 +46,6 @@ formElement.addEventListener('submit', e => {
   }
 });
 
-const products = document.querySelector('#products');
-products.addEventListener('click', e => {
-
-});
+const productsElement = document.querySelector('#products');
+const products = new Products({ store, element: productsElement })
+products.render();
