@@ -29,6 +29,7 @@ export class Store {
   dispatch(action, data) {
     if (!this.actions.has(action)) {
       console.error(`Action: ${action} doesn't exist`);
+      return;
     }
 
     const newState = this.actions.get(action)(this.state, data);
