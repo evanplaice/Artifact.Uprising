@@ -146,3 +146,14 @@ ul {
   padding: 20px 10px 10px 0;
 }
 
+#cart .cart_total {
+  display: inline-flex;
+  float: right;
+  justify-content: end;
+  margin-right: 20px;
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+#cart .cart_total > label {
+  margin-right: 10px;
+}

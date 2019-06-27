@@ -9,7 +9,7 @@ export class Cart extends Component {
   render() {
     const items = this.store.state.items;
     const total = items.reduce((acc, curr) => {
-      acc += parseFloat(curr.price);
+      acc += parseFloat(curr.price * curr.quantity);
       return acc;
     }, 0);
 
@@ -40,6 +40,8 @@ export class Cart extends Component {
       </ul>
       <hr/>
       <div class="cart_total">
+        <label>Total:</label>
+        <div>$${total.toFixed(2)}</div>
       </div>
     `
 
