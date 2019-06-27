@@ -17,7 +17,7 @@ const store = new PersistentStore('cart', {
   save: (name, state) => {
     localStorage.setItem(name, JSON.stringify(state));
   },
-  load(name) {
+  load: (name) => {
     if (localStorage.getItem(name) !== null) {
       return JSON.parse(localStorage.getItem(name));
     }
