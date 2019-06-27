@@ -35,7 +35,7 @@ export class PersistentStore {
           this.save(this.name, this.state);
         }
 
-        console.log(`stateChange: { ${key}: ${value} }`);
+        // console.log(`stateChange: { ${key}: ${value} }`);
 
         this.events.publish('stateChange', this.state);
 

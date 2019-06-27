@@ -14,15 +14,16 @@ export default new PersistentStore('cart', {
         }
       })
 
+      // add item if it doesn't exist in cart
       if (match.length === 0) {
         item.quantity = 1;
         state.items.push(item);
         return state
       }
-       console.log(index);
+      
+      // if item is in cart increment the quantity
       state.items[index].quantity += 1;
       return state;
-      
     }],
     ['DELETE', (state, {index}) =>  {
       state.items.splice(index, 1);

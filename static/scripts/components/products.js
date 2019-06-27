@@ -2,6 +2,8 @@ import { Component } from './component.js';
 
 export class Products extends Component {
 
+  products;
+
   constructor({ store, element }) {
     super({ store, element });
   }
@@ -12,12 +14,12 @@ export class Products extends Component {
       .then(body => JSON.parse(body))
   }
 
-  addToCart(id) {
-    console.log(id);
-  }
-
   async render() {
-    const products = await this.getProducts() || [];
+    // prevent re-fetch + re-render
+    if (this.products) { return; }
+
+    this.products = this.products || await this.getProducts() || [];
+    const products = this.products;
 
     this.element.innerHTML = `
       ${products.map(product => {
