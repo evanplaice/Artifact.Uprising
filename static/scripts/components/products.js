@@ -34,7 +34,7 @@ export class Products extends Component {
 
     this.element.querySelectorAll('button').forEach((product, index) => {
       product.addEventListener('click', () => {
-        this.store.dispatch('ADD', products[index]);
+        this.store.dispatch('ADD', { item: products[index] });
       });
     });
   }
