@@ -1,5 +1,5 @@
-import { PersistentStore } from './store/persistent-store.js';
-import { Cart } from './components/cart.js';
+import { PersistentStore } from './store/index.js';
+import { Cart, Products, Total } from './components/index.js';
 
 const store = new PersistentStore('cart', {
   state: { items: [] },

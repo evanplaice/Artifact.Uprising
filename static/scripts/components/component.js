@@ -1,4 +1,4 @@
-import { PersistentStore } from '../store/persistent-store.js';
+import { PersistentStore } from '../store/index.js';
 
 export class Component {
   element;
