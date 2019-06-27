@@ -9,8 +9,7 @@ export class Products extends Component {
   async getProducts() {
     return fetch('http://localhost:3000/products')
       .then(response => response.text())
-      .then(body => JSON.parse(body));
-
+      .then(body => JSON.parse(body))
   }
 
   addToCart(id) {
@@ -35,7 +34,6 @@ export class Products extends Component {
 
     this.element.querySelectorAll('button').forEach((product, index) => {
       product.addEventListener('click', () => {
-        console.log(products[index]);
         this.store.dispatch('ADD', products[index]);
       });
     });
