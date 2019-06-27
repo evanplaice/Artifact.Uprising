@@ -19,7 +19,14 @@ type Product struct {
 type Products []Product
 
 var products = Products{
-	Product{ID: 0, Name: "Test1", Price: "5.99", Image: "test1.jpg"},
+	Product{ID: 0, Name: "DoubleVez Chrono", Price: "5.99", Image: "doublevez-chrono.jpg"},
+	Product{ID: 1, Name: "Compass Rose", Price: "5.99", Image: "compass-rose.jpg"},
+	Product{ID: 2, Name: "Marathon Sport", Price: "5.99", Image: "marathon-sport.jpg"},
+	Product{ID: 3, Name: "Fresh Cut", Price: "5.99", Image: "fresh-cut.jpg"},
+	Product{ID: 4, Name: "La Femme", Price: "5.99", Image: "la-femme.jpg"},
+	Product{ID: 5, Name: "Minimalist", Price: "5.99", Image: "minimalist.jpg"},
+	Product{ID: 6, Name: "Sazerac", Price: "5.99", Image: "sazerac.jpg"},
+	Product{ID: 7, Name: "Vaporwave", Price: "5.99", Image: "vaporwave.jpg"},
 }
 
 // API: returns a list of products
@@ -67,6 +74,6 @@ func main() {
 	r.Path("/product/{id:[0-9]+}").HandlerFunc(getProduct).Methods("GET")
 	r.PathPrefix("/").Handler(http.FileServer(http.Dir("./static/")))
 
-	log.Println("Listening...")
+	log.Println("Listening on port 3000...")
 	http.ListenAndServe(":3000", r)
 }
