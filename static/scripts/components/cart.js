@@ -9,12 +9,17 @@ export class Cart extends Component {
   render() {
     const items = this.store.state.items;
 
+    // render this if cart is empty
     if(items.length === 0) {
-      this.element.innerHTML = `<p class="no-items">You've done nothing yet &#x1f622;</p>`;
+      this.element.innerHTML = `
+        <h2>Cart:</h2>
+        <p class="no-items">You're cart is currently empty</p>
+      `;
       return;
     }
 
     this.element.innerHTML = `
+      <h2>Cart:</h2>
       <ul class="cart_items">
         ${items.map(item => {
           return `
