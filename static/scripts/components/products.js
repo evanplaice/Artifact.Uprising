@@ -26,7 +26,7 @@ export class Products extends Component {
         return `
           <div class="product">
             <img src="/images/products/${product.image}" alt="Product image for ${product.name}"/>
-            <h2>${product.name}</h2>
+            <h3>${product.name}</h3>
             <p class="price">$19.99</p>
             <button>Add to Cart</button>
           </div>
